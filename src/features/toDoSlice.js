@@ -12,7 +12,8 @@ export const toDoSlice = createSlice({
   initialState,
   reducers: {
     setToDo: (state, action) => {
-      state.toDoList = [...state.toDoList, action.payload];
+      state.toDoList = [...action.payload];
+      saveStorage([...state.toDoList], "todo");
     },
 
     addTodo: (state, action) => {

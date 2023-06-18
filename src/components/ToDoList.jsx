@@ -1,9 +1,10 @@
 import { arrayMoveImmutable } from "array-move";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import ToDoItem from "./ToDoItem";
 import { sortableContainer } from "react-sortable-hoc";
-import { useEffect, } from "react";
+import { useEffect } from "react";
+import { setToDo } from "../features/toDoSlice";
 // import { setToDo } from "../features/toDoSlice";
 
 const SortableContainer = sortableContainer(({ children }) => {
@@ -13,12 +14,13 @@ const SortableContainer = sortableContainer(({ children }) => {
 const TodoList = () => {
   const todoLists = useSelector((state) => state.todo.toDoList);
   console.log("todoLists", todoLists);
+  const dispatch = useDispatch();
 
   const onSortEnd = ({ oldIndex, newIndex }) => {
-    const ar = arrayMoveImmutable(todoLists, oldIndex, newIndex);
-    console.log(ar);
+    // const ar = arrayMoveImmutable(todoLists, oldIndex, newIndex);
+    // console.log(ar);
 
-    // dispatch(setToDo(arrayMoveImmutable(todoLists, oldIndex, newIndex)));
+    dispatch(setToDo(arrayMoveImmutable(todoLists, oldIndex, newIndex)));
   };
   useEffect(() => {}, [todoLists]);
 
